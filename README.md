@@ -1,24 +1,48 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Build with, a place to showcase projects and skills.
 
-Things you may want to cover:
+New age Ruby on Rails tech stack:
+* Ruby 3+
+* Rails 7+
+* Import mapped JavaScript inclusion (no Node)
+* Propshaft asset pipeline (no sprockets compilation)
+* Hotwire framework (Turbo, Stimulus)
 
-* Ruby version
 
-* System dependencies
+## Development
 
-* Configuration
+### Requirements
+* Bundler `(>= 1.15.0)`
+* Ruby [3.3+](/Gemfile#L3)
+* Rails [7.1+](/Gemfile#L6)
 
-* Database creation
 
-* Database initialization
+### Installation
+1) Clone Repository
 
-* How to run the test suite
+2) `bundle install`
 
-* Services (job queues, cache servers, search engines, etc.)
+3) check import maps (?)
 
-* Deployment instructions
+4) `bin/rails db:migrate`
 
-* ...
+### Starting server
+
+`./bin/dev` - Ensures proper server startup with Procfile.dev and dartsass watching
+
+### Usage
+
+### Structure
+
+### Contributing
+
+### Database
+
+### Import maps / Javascript
+
+
+### Test suite
+
+
+### Deployment
