@@ -11,4 +11,11 @@
   <% end %>
 </div>
 
-<%= link_to "New company", new_company_path, class: 'label label-danger' %>
+<%= link_to "New company", new_company_path, class: 'btn btn--primary' %>
+
+<%= turbo_frame_tag "first_turbo_frame" do %>
+  <div class="header">
+    <h1>Company (Turbo Frame)</h1>
+    <%= link_to "New company (turbo)", new_company_path, class: "btn btn-primary" %>
+  </div>
+<% end %>
