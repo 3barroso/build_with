@@ -2,4 +2,7 @@
 import "@hotwired/turbo-rails"
 import "controllers"
 
+// required for bootstrap.js (add back import maps)
+// import "@jquery"
+// import "@popperjs/core"
 // import "bootstrap"
