@@ -67,3 +67,6 @@ group :test do
 end
 
 gem "dartsass-rails", "~> 0.5.0"
+
+# local gem install (FIPS)
+gem "fips_lookup"
