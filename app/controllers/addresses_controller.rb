@@ -73,7 +73,7 @@ class AddressesController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def address_params
-    params.fetch(:address, {}).permit(:street, :postal_code, :street_number, :city, :state, :county, :fips_code, :country)
+    params.fetch(:address, {}).permit(:street, :postal_code, :street_number, :city, :state, :county, :fips_code, :country, :location_type)
   end
 
   def set_state_options
