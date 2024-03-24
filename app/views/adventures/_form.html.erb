@@ -1,0 +1,47 @@
+<%= form_with(model: adventure) do |form| %>
+  <% if adventure.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(adventure.errors.count, "error") %> prohibited this adventure from being saved:</h2>
+
+      <ul>
+        <% adventure.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :title, style: "display: block" %>
+    <%= form.text_field :title %>
+  </div>
+
+  <div>
+    <%= form.label :description, style: "display: block" %>
+    <%= form.text_area :description %>
+  </div>
+
+  <div>
+    <%= form.label :status, style: "display: block" %>
+    <%= form.number_field :status %>
+  </div>
+
+  <div>
+    <%= form.label :shareable, style: "display: block" %>
+    <%= form.number_field :shareable %>
+  </div>
+
+  <div>
+    <%= form.label :active, style: "display: block" %>
+    <%= form.check_box :active %>
+  </div>
+
+  <div>
+    <%= form.label :target_completion, style: "display: block" %>
+    <%= form.datetime_field :target_completion %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>
