@@ -23,12 +23,12 @@
 
   <div>
     <%= form.label :status, style: "display: block" %>
-    <%= form.number_field :status %>
+    <%= form.select :status, { select: Adventure.statuses.keys }, include_blank: true %>
   </div>
 
   <div>
     <%= form.label :shareable, style: "display: block" %>
-    <%= form.number_field :shareable %>
+    <%= form.select :shareable, { select: Adventure.shareables.keys }, include_blank: true %>
   </div>
 
   <div>

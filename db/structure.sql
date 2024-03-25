@@ -17,8 +17,9 @@ FOREIGN KEY ("blob_id")
   REFERENCES "active_storage_blobs" ("id")
 );
 CREATE UNIQUE INDEX "index_active_storage_variant_records_uniqueness" ON "active_storage_variant_records" ("blob_id", "variation_digest");
-CREATE TABLE IF NOT EXISTS "adventures" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "title" varchar, "description" text, "status" integer, "shareable" integer, "active" boolean, "target_completion" datetime(6), "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL);
+CREATE TABLE IF NOT EXISTS "adventures" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "title" varchar DEFAULT NULL, "description" text DEFAULT NULL, "status" integer DEFAULT NULL, "shareable" integer DEFAULT NULL, "active" boolean DEFAULT NULL, "target_completion" datetime(6) DEFAULT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL);
 INSERT INTO "schema_migrations" (version) VALUES
+('20240325003334'),
 ('20240324214859'),
 ('20240324003700'),
 ('20240323023103'),
