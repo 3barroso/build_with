@@ -68,6 +68,4 @@ end
 
 gem "dartsass-rails", "~> 0.5.0"
 gem 'image_processing', '~> 1.2'
-
-# local gem install (FIPS)
-gem "fips_lookup"
+gem 'fips_lookup', '~> 0.2.0'
