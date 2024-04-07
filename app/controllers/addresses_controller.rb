@@ -24,6 +24,7 @@ class AddressesController < ApplicationController
 
   # GET /addresses/1/edit
   def edit
+    @address.assign_attributes address_params unless address_params.empty?
   end
 
   # POST /addresses or /addresses.json

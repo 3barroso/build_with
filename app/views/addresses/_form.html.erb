@@ -36,7 +36,6 @@
       <%= form.label :state, style: "display: block" %>
       <%= form.select :state, @state_options, {prompt: "-select-"},
         data: { action: "change->address#click" } %>
-        <% # not working for edit page ? (abstract form into frame and only change that target?) %>
     </div>
 
     <% if @county_options.present? %>
@@ -46,8 +45,7 @@
       </div>
     <% end %>
     
-    <% # change not happening when triggered on /edit page %>
-    <button formmethod="get" formaction="<%= new_address_path %>" hidden
+    <button formmethod="get" formaction="<%= request.url %>" hidden
       data-address-target="click">
     </button>
   </fieldset>
