@@ -3,8 +3,8 @@
 # Path locations and form response methods
 class AddressesController < ApplicationController
   before_action :set_address, only: %i[show edit update destroy]
-  before_action :set_state_options, only: %i[new edit]
-  before_action :set_county_options, only: %i[new edit]
+  before_action :set_state_options, only: %i[new edit update]
+  before_action :set_county_options, only: %i[new edit update]
 
   require 'fips_lookup'
 
@@ -24,7 +24,7 @@ class AddressesController < ApplicationController
 
   # GET /addresses/1/edit
   def edit
-    @address.assign_attributes address_params unless address_params.empty?
+    @address.assign_attributes address_params unless address_params.empty? || @address.errors.present?
   end
 
   # POST /addresses or /addresses.json
@@ -85,9 +85,9 @@ class AddressesController < ApplicationController
   end
 
   def set_county_options
-    return unless FipsLookup::STATE_CODES.key?(address_params[:state])
+    return unless FipsLookup::STATE_CODES.key?(address_params[:state] || @address&.state)
 
-    state_code = address_params[:state]
+    state_code = address_params[:state] || @address.state
     @county_options = []
     CSV.foreach(FipsLookup.county_file(state_code:)) do |county_row|
       @county_options << county_row[3]
