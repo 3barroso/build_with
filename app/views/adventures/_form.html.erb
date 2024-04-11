@@ -44,4 +44,35 @@
   <div>
     <%= form.submit %>
   </div>
+
+  <% if @adventure.addresses.present? || true %>
+    <h3>Addresses</h3>
+    <%= form.fields_for :adventure_addresses do |adventure_address_form| %>
+      <%= adventure_address_form.label :description, style: "display: block" %>
+      <%= adventure_address_form.text_area :description %>
+      <%= adventure_address_form.fields_for :address do |addresses_form| %>
+        <%= addresses_form.label :city, style: "display: block" %>
+        <%= addresses_form.text_field :city, required: true %>
+
+        <div>
+          <%= addresses_form.label :street_number, style: "display: block" %>
+          <%= addresses_form.text_field :street_number, autocomplete: "off", required: true%>
+        </div>
+
+        <div>
+          <%= addresses_form.label :street, "Street name ", style: "display: block" %>
+          <%= addresses_form.text_field :street, required: true %>
+        </div>
+        <div>
+          <%= addresses_form.label :postal_code, style: "display: block" %>
+          <%= addresses_form.text_field :postal_code %>
+        </div>
+        <div>
+          <%= addresses_form.label :state, style: "display: block" %>
+          <%= addresses_form.text_field :state %>
+        </div>
+      <% end %>
+    <% end %>
+  <% end %>
+
 <% end %>

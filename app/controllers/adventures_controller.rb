@@ -1,5 +1,5 @@
 class AdventuresController < ApplicationController
-  before_action :set_adventure, only: %i[ show edit update destroy ]
+  before_action :set_adventure, only: %i[show edit update destroy]
 
   # GET /adventures or /adventures.json
   def index
@@ -13,6 +13,7 @@ class AdventuresController < ApplicationController
   # GET /adventures/new
   def new
     @adventure = Adventure.new
+    @adventure.adventure_addresses.build.build_address
   end
 
   # GET /adventures/1/edit
@@ -58,13 +59,24 @@ class AdventuresController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_adventure
-      @adventure = Adventure.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def adventure_params
-      params.require(:adventure).permit(:title, :description, :status, :shareable, :active, :target_completion)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_adventure
+    @adventure = Adventure.includes(:addresses).find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def adventure_params
+    params.require(:adventure).permit(
+      :title,
+      :description,
+      :status,
+      :shareable,
+      :active,
+      :target_completion,
+      adventure_addresses_attributes: [:description, :id,
+        address_attributes: [:id, :street_number, :street, :city, :state, :postal_code, :location_type]
+      ]
+    )
+  end
 end
