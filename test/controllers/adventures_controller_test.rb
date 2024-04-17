@@ -3,6 +3,7 @@ require "test_helper"
 class AdventuresControllerTest < ActionDispatch::IntegrationTest
   setup do
     @adventure = adventures(:one)
+    @address = addresses(:one)
   end
 
   test "should get index" do
@@ -21,6 +22,18 @@ class AdventuresControllerTest < ActionDispatch::IntegrationTest
     end
 
     assert_redirected_to adventure_url(Adventure.last)
+  end
+
+  test "should create addresses with adventure creation" do
+    assert_difference ['Address.count', 'Adventure.count'], 1 do
+      post adventures_url, params: { adventure: { active: @adventure.active, "adventure_addresses_attributes"=>{"0"=>{"description"=>"home reno", "address_attributes"=>{"city"=>@address.city, "street_number"=>"123", "street"=>@address.street, "state"=>@address.state }}}}}
+    end
+  end
+
+  test "should find exisiting addresses with adventure creation" do
+    assert_difference -> { Address.count } => 0, -> { Adventure.count } => 1 do
+      post adventures_url, params: { adventure: { active: @adventure.active, "adventure_addresses_attributes"=>{"0"=>{"description"=>"home reno", "address_attributes"=>{"city"=>@address.city, "street_number"=>@address.street_number, "street"=>@address.street, "state"=>@address.state }}}}}
+    end
   end
 
   test "should show adventure" do
