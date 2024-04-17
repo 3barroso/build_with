@@ -13,4 +13,18 @@ class Adventure < ApplicationRecord
   has_many_attached :images do |attachable|
     attachable.variant :mobile, resize_to_limit: [200, 100]
   end
+
+  before_validation :find_or_create_addresses
+
+  def find_or_create_addresses
+    adventure_addresses.each do |adventure_address|
+      address_params = adventure_address.address
+      adventure_address.address = Address.find_or_create_by(
+        street_number: address_params.street_number,
+        street: address_params.street,
+        city: address_params.city,
+        state: address_params.state
+      )
+    end
+  end
 end

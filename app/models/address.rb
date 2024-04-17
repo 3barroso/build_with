@@ -9,7 +9,6 @@ class Address < ApplicationRecord
 
   enum location_type: { land: 0, property: 1, home: 2, appartment: 3, condominium: 4, retail: 5, commercial: 6 }
 
-
   validates :street_number, :street, :city, :state, presence: true
   validates_uniqueness_of :street_number, scope: %i[street city state] # on create?
 

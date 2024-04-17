@@ -18,6 +18,7 @@ class AdventuresController < ApplicationController
 
   # GET /adventures/1/edit
   def edit
+    @adventure.adventure_addresses.first.build_address if @adventure.addresses.empty?
   end
 
   # POST /adventures or /adventures.json
