@@ -1,5 +1,12 @@
+# frozen_string_literal: true
+
+# Path locations and form response methods
 class AddressesController < ApplicationController
-  before_action :set_address, only: %i[ show edit update destroy ]
+  before_action :set_address, only: %i[show edit update destroy]
+  before_action :set_state_options, only: %i[new edit update]
+  before_action :set_county_options, only: %i[new edit update]
+
+  require 'fips_lookup'
 
   # GET /addresses or /addresses.json
   def index
@@ -12,11 +19,12 @@ class AddressesController < ApplicationController
 
   # GET /addresses/new
   def new
-    @address = Address.new
+    @address = Address.new address_params
   end
 
   # GET /addresses/1/edit
   def edit
+    @address.assign_attributes address_params unless address_params.empty? || @address.errors.present?
   end
 
   # POST /addresses or /addresses.json
@@ -58,13 +66,31 @@ class AddressesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_address
-      @address = Address.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def address_params
-      params.require(:address).permit(:street, :postal_code, :street_number, :city, :state, :fips_code, :country)
+  # Use callbacks to share common setup or constraints between actions.
+  def set_address
+    @address = Address.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def address_params
+    params.fetch(:address, {}).permit(:street, :postal_code, :street_number, :city, :state, :county, :fips_code, :country, :location_type)
+  end
+
+  def set_state_options
+    @state_options = [] # select options [display name, form value]
+    CSV.foreach(FipsLookup.state_file) do |state_row|
+      @state_options << [state_row[2], state_row[1]]
     end
+  end
+
+  def set_county_options
+    return unless FipsLookup::STATE_CODES.key?(address_params[:state] || @address&.state)
+
+    state_code = address_params[:state] || @address.state
+    @county_options = []
+    CSV.foreach(FipsLookup.county_file(state_code:)) do |county_row|
+      @county_options << county_row[3]
+    end
+  end
 end

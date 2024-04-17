@@ -17,6 +17,12 @@
   </div>
 
   <div>
+    <%= form.label :logo, style: "display: block" %>
+    <%= form.file_field :logo %>
+    <% # can add value: image.signed_id to keep files with has_many_attachments%>
+  </div>
+
+  <div>
     <%= form.submit %>
   </div>
 <% end %>

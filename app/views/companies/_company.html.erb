@@ -4,4 +4,9 @@
     <%= company.name %>
   </p>
 
+  <div>
+    <% if company.logo.representable? %>
+      <%= image_tag company.logo.representation(resize_to_limit: [100, 100]) %>
+    <% end %>
+  </div>
 </div>

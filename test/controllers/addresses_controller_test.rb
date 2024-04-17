@@ -17,7 +17,7 @@ class AddressesControllerTest < ActionDispatch::IntegrationTest
 
   test "should create address" do
     assert_difference("Address.count") do
-      post addresses_url, params: { address: { city: @address.city, country: @address.country, fips_code: @address.fips_code, postal_code: @address.postal_code, state: @address.state, street: @address.street, street_number: @address.street_number } }
+      post addresses_url, params: { address: { city: "Ann Arbor", country: @address.country, fips_code: @address.fips_code, postal_code: @address.postal_code, state: "MI", street: "Packard", street_number: "123" } }
     end
 
     assert_redirected_to address_url(Address.last)
