@@ -11,6 +11,7 @@ class CompaniesController < ApplicationController
 
   # GET /companies/1 or /companies/1.json
   def show
+    redirect_to companies_url, alert: "Could not find company: #{params[:slug]}" if @company.nil?
   end
 
   # GET /companies/new
@@ -64,11 +65,12 @@ class CompaniesController < ApplicationController
 
   # Use callbacks to share common setup or constraints between actions.
   def set_company
-    @company = Company.find(params[:id])
+    @company = Company.find_by(slug: params[:slug])
+    # adjust search to be flexible ? (or show options on index page)
   end
 
   # Only allow a list of trusted parameters through.
   def company_params
-    params.require(:company).permit(:name, :logo)
+    params.require(:company).permit(:name, :logo, :slug)
   end
 end
