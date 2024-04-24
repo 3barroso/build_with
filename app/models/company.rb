@@ -5,4 +5,6 @@ class Company < ApplicationRecord
   has_one_attached :logo do |attachable|
     attachable.variant :banner, resize_to_limit: [200, 400]
   end
+
+  validates_uniqueness_of :slug
 end
