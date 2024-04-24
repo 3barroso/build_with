@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# Tracking work events (adventures)
 class AdventuresController < ApplicationController
   before_action :set_adventure, only: %i[show edit update destroy]
 
@@ -27,7 +30,7 @@ class AdventuresController < ApplicationController
 
     respond_to do |format|
       if @adventure.save
-        format.html { redirect_to adventure_url(@adventure), notice: "Adventure was successfully created." }
+        format.html { redirect_to adventure_url(@adventure), notice: 'Adventure was successfully created.' }
         format.json { render :show, status: :created, location: @adventure }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -40,7 +43,7 @@ class AdventuresController < ApplicationController
   def update
     respond_to do |format|
       if @adventure.update(adventure_params)
-        format.html { redirect_to adventure_url(@adventure), notice: "Adventure was successfully updated." }
+        format.html { redirect_to adventure_url(@adventure), notice: 'Adventure was successfully updated.' }
         format.json { render :show, status: :ok, location: @adventure }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -54,7 +57,7 @@ class AdventuresController < ApplicationController
     @adventure.destroy!
 
     respond_to do |format|
-      format.html { redirect_to adventures_url, notice: "Adventure was successfully destroyed." }
+      format.html { redirect_to adventures_url, notice: 'Adventure was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
