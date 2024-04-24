@@ -24,23 +24,23 @@ class CompaniesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should show company" do
-    get company_url(@company)
+    get company_url(@company.slug)
     assert_response :success
   end
 
   test "should get edit" do
-    get edit_company_url(@company)
+    get edit_company_url(@company.slug)
     assert_response :success
   end
 
   test "should update company" do
-    patch company_url(@company), params: { company: { name: @company.name } }
+    patch company_url(@company.slug), params: { company: { name: @company.name } }
     assert_redirected_to company_url(@company)
   end
 
   test "should destroy company" do
     assert_difference("Company.count", -1) do
-      delete company_url(@company)
+      delete company_url(@company.slug)
     end
 
     assert_redirected_to companies_url
