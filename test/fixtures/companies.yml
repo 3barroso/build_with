@@ -2,6 +2,8 @@
 
 one:
   name: MyString
+  slug: CompanyOne
 
 two:
   name: MyString
+  slug: CompanyTwo
