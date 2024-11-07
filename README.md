@@ -14,8 +14,8 @@ New age Ruby on Rails tech stack:
 
 ### Requirements
 * Bundler `(>= 1.15.0)`
-* Ruby [3.3+](/Gemfile#L3)
-* Rails [7.1+](/Gemfile#L6)
+* Ruby [3.3+](/.ruby-version)
+* Rails [7.2+](/Gemfile#L6)
 
 
 ### Installation
