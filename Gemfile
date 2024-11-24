@@ -66,6 +66,7 @@ group :test do
   gem "selenium-webdriver"
 end
 
-gem "dartsass-rails", "~> 0.5.0"
 gem 'image_processing', '~> 1.2'
 gem 'fips_lookup', '~> 0.2.1'
+
+gem "tailwindcss-rails", "~> 3.0"
