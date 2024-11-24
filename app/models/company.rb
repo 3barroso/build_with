@@ -6,5 +6,11 @@ class Company < ApplicationRecord
     attachable.variant :banner, resize_to_limit: [200, 400]
   end
 
-  validates_uniqueness_of :slug
+  validates :slug, presence: true, uniqueness: true
+
+  before_validation :prep_company_save
+
+  def prep_company_save
+    slug.downcase!
+  end
 end

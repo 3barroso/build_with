@@ -9,7 +9,7 @@ class CompaniesController < ApplicationController
     @companies = Company.all
   end
 
-  # GET /companies/1 or /companies/1.json
+  # GET /companies/:slug or /companies/:slug.json
   def show
     redirect_to companies_url, alert: "Could not find company: #{params[:slug]}" if @company.nil?
   end
@@ -65,7 +65,7 @@ class CompaniesController < ApplicationController
 
   # Use callbacks to share common setup or constraints between actions.
   def set_company
-    @company = Company.find_by(slug: params[:slug])
+    @company = Company.find_by(slug: params[:slug]) || Company.find(params[:slug])
     # adjust search to be flexible ? (or show options on index page)
   end
 
