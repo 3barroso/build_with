@@ -1,4 +1,6 @@
 <p style="color: green"><%= notice %></p>
+<p style="color: red"><%= alert %></p>
+
 
 <h1>Companies</h1>
 
@@ -6,7 +8,7 @@
   <% @companies.each do |company| %>
     <%= render company %>
     <p>
-      <%= link_to "Show this company", company %>
+      <%= link_to "Show this company", company_url(company) %>
     </p>
   <% end %>
 </div>
